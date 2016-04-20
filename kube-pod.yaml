@@ -23,6 +23,30 @@ spec:
         ports:
         - containerPort: 8085
           protocol: "TCP"
+        env:
+        - name: DOORMAN_MODULES
+          value: "github"
+        - name: DOORMAN_LISTEN_PORT
+          value: "8085"
+        - name: DOORMAN_PROXY_HOST
+          value: localhost
+        - name: DOORMAN_PROXY_PORT
+          value: "8080"
+        - name: DOORMAN_GITHUB_APPID
+          valueFrom:
+            secretKeyRef:
+              name: github-oauth-kafkaoffsetmonitor
+              key: doorman.github.appid
+        - name: DOORMAN_GITHUB_APPSECRET
+          valueFrom:
+            secretKeyRef:
+              name: github-oauth-kafkaoffsetmonitor
+              key: doorman.github.secret
+        - name: DOORMAN_GITHUB_REQUIRED_ORGANIZATION
+          valueFrom:
+            secretKeyRef:
+              name: github-oauth-kafkaoffsetmonitor
+              key: doorman.github.required.organization
 
       # Pod
       - name: "kafkaoffsetmonitor"
@@ -34,4 +58,7 @@ spec:
         args: ["com.quantifind.kafka.offsetapp.OffsetGetterWeb", "--zk", "172.16.31.246", "--refresh", "10.seconds", "--retain", "2.days", "--port", "8080"]
 
 
-
+      volumes:
+      - name: github-oauth-kafkaoffsetmonitor
+        secret:
+          secretName: github-oauth-kafkaoffsetmonitor

@@ -9,7 +9,7 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: doorman
+          serviceName: kafkaoffsetmonitor
           servicePort: 8085
       - path: /.well-known/acme-challenge
         backend:
