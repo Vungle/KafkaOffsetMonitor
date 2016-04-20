@@ -16,8 +16,16 @@ spec:
     spec:
       containers:
 
+      # Pod Doorman
+      - name: "doorman"
+        image: "vungle/doorman:latest"
+        imagePullPolicy: "Always"
+        ports:
+        - containerPort: 8085
+          protocol: "TCP"
+
       # Pod
-      - name: "vungle-ingest"
+      - name: "kafkaoffsetmonitor"
         image: "vungle/kafkaoffsetmonitor:0.2.1"
         imagePullPolicy: "Always"
         ports:

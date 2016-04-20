@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: kafkaoffsetmonitor
+spec:
+  rules:
+  - host: doorman-kafkaoffsetmonitor.vungle.io
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: doorman
+          servicePort: 8085
+      - path: /.well-known/acme-challenge
+        backend:
+          serviceName: lets-encrypt
+          servicePort: 80

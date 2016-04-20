@@ -6,9 +6,16 @@ metadata:
     app: kafkaoffsetmonitor
 spec:
   ports:
+
   - port: 80
     protocol: TCP
     targetPort: 8080
-    name: http
+    name: kafkaoffsetmonitor
+
+  - port: 8085
+    protocol: TCP
+    targetPort: 8085
+    name: doorman
+
   selector:
     app: kafkaoffsetmonitor
