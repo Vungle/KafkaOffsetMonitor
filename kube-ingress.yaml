@@ -3,6 +3,15 @@ kind: Ingress
 metadata:
   name: kafkaoffsetmonitor
 spec:
+  tls:
+  - hosts:
+    - doorman-kafkaoffsetmonitor.vungle.io
+    # This secret must exist beforehand
+    # The cert must also contain the subj-name foo.bar.com
+    # You can create it via:
+    # make keys secret SECRET=/tmp/foobar.json HOST=foo.bar.com NAME=foobar
+    # https://github.com/kubernetes/contrib/tree/master/ingress/controllers/gce/https_example
+    secretName: ssl-cert-start-vungle-io
   rules:
   - host: doorman-kafkaoffsetmonitor.vungle.io
     http:
@@ -11,7 +20,3 @@ spec:
         backend:
           serviceName: kafkaoffsetmonitor
           servicePort: 8085
-      - path: /.well-known/acme-challenge
-        backend:
-          serviceName: lets-encrypt
-          servicePort: 80

@@ -55,7 +55,7 @@ spec:
         ports:
         - containerPort: 8080
           protocol: "TCP"
-        args: ["com.quantifind.kafka.offsetapp.OffsetGetterWeb", "--zk", "172.16.31.246", "--refresh", "10.seconds", "--retain", "2.days", "--port", "8080"]
+        args: ["com.quantifind.kafka.offsetapp.OffsetGetterWeb", "--zk", "172.20.42.103", "--refresh", "10.seconds", "--retain", "2.days", "--port", "8080"]
 
 
       volumes:
